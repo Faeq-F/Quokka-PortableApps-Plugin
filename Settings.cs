@@ -3,7 +3,7 @@
 namespace Plugin_PortableApps {
 
   /// <summary>
-  ///   The setting for this (Portable Apps) plugin
+  ///   The settings for this (Portable Apps) plugin
   /// </summary>
   public class Settings {
 
