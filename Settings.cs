@@ -20,6 +20,13 @@ namespace Plugin_PortableApps {
     public string AllAppsSpecialCommand { get; set; } = "AllPortableApps";
 
     /// <summary>
+    /// The command signifier to show only portable apps (defaults to "portapp ")<br />
+    /// Using this signifier does not change the output of this plugin, it only
+    /// ensures that no other plugins' results are included in the search window results list
+    /// </summary>
+    public string PortableAppsSignifier { get; set; } = "portapp ";
+
+    /// <summary>
     ///   List of application names to not show (defaults to
     ///   empty - all apps can be shown)
     /// </summary>

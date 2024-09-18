@@ -1,6 +1,7 @@
 {
   "PortableAppsDirectory": "..\\..\\PortableApps\\",
   "AllAppsSpecialCommand": "AllPortableApps",
+  "PortableAppsSignifier": "portapp ",
   "BlackList": [],
   "FuzzySearchThreshold": 5
 }

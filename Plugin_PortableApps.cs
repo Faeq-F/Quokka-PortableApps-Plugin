@@ -12,12 +12,13 @@ namespace Plugin_PortableApps {
   /// <summary>
   ///  The Portable Apps Plugin
   /// </summary>
-  public partial class PortableApps : IPlugger {
+  public partial class PortableApps : Plugin {
 
     /// <summary>
     ///  <inheritdoc/>
     /// </summary>
-    public string PluggerName { get; set; } = "PortableApps";
+    public override string PluggerName { get; set; } = "PortableApps";
+
     private static Settings pluginSettings = new();
     internal static Settings PluginSettings { get => pluginSettings; set => pluginSettings = value; }
 
@@ -39,12 +40,7 @@ namespace Plugin_PortableApps {
       return list;
     }
 
-    /// <summary>
-    /// <inheritdoc />
-    /// </summary>
-    /// <param name="query">The app being searched for</param>
-    /// <returns>List of PortableApps that possibly match what is being searched for</returns>
-    public List<ListItem> OnQueryChange(string query) {
+    private List<ListItem> ProduceItems(string query) {
       List<ListItem> IdentifiedApps = new();
       //filtering apps
       foreach (ListItem app in AllPortableApps) {
@@ -58,10 +54,19 @@ namespace Plugin_PortableApps {
     }
 
     /// <summary>
+    /// <inheritdoc />
+    /// </summary>
+    /// <param name="query">The app being searched for</param>
+    /// <returns>List of PortableApps that possibly match what is being searched for</returns>
+    public override List<ListItem> OnQueryChange(string query) {
+      return ProduceItems(query);
+    }
+
+    /// <summary>
     /// <inheritdoc/>
     /// </summary>
     /// <returns>The AllAppsSpecialCommand from plugin settings</returns>
-    public List<string> SpecialCommands() {
+    public override List<string> SpecialCommands() {
       List<string> SpecialCommand = new() {
         PluginSettings.AllAppsSpecialCommand
       };
@@ -73,7 +78,7 @@ namespace Plugin_PortableApps {
     /// </summary>
     /// <param name="command">The 'all apps' command (Since there is only 1 special command for this plugin)</param>
     /// <returns>All Apps sorted alphabetically + a shortcut to the portable apps folder</returns>
-    public List<ListItem> OnSpecialCommand(string command) {
+    public override List<ListItem> OnSpecialCommand(string command) {
       List<ListItem> AllList = new(AllPortableApps);
       AllList = AllList.OrderBy(x => x.Name).ToList();
       AllList.Insert(0, new PortableAppsFolderItem());
@@ -85,7 +90,7 @@ namespace Plugin_PortableApps {
     /// <inheritdoc/>
     /// Creates the list of all portable apps
     /// </summary>
-    public void OnAppStartup() {
+    public override void OnAppStartup() {
       if (Directory.Exists(PluginSettings.PortableAppsDirectory)) {
         var topLevelDirs = Directory.EnumerateDirectories(PluginSettings.PortableAppsDirectory, "*", SearchOption.TopDirectoryOnly);
         foreach (string dir in topLevelDirs) {
@@ -97,19 +102,23 @@ namespace Plugin_PortableApps {
     }
 
     /// <summary>
-    /// <inheritdoc/> Does Nothing.
+    /// <inheritdoc/>
     /// </summary>
-    public void OnAppShutdown() {
+    /// <returns>
+    /// The PortableAppsSignifier from plugin settings
+    /// </returns>
+    public override List<string> CommandSignifiers() {
+      return new List<string>() { pluginSettings.PortableAppsSignifier };
     }
 
     /// <summary>
-    /// <inheritdoc/> Does Nothing.
+    /// <inheritdoc/>
     /// </summary>
-    public void OnSearchWindowStartup() {
+    /// <param name="command">The PortableAppsSignifier (Since there is only 1 signifier for this plugin), followed by the app being searched for</param>
+    /// <returns>List of PortableApps that possibly match what is being searched for</returns>
+    public override List<ListItem> OnSignifier(string command) {
+      return ProduceItems(command.Substring(pluginSettings.PortableAppsSignifier.Length));
     }
-
-
-
 
   }
 }
