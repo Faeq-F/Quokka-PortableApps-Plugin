@@ -3,5 +3,5 @@
   "AllAppsSpecialCommand": "AllPortableApps",
   "PortableAppsSignifier": "portapp ",
   "BlackList": [],
-  "FuzzySearchThreshold": 5
+  "FuzzySearchThreshold": 3
 }

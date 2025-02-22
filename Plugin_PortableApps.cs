@@ -45,7 +45,7 @@ namespace Plugin_PortableApps {
       //filtering apps
       foreach (ListItem app in AllPortableApps) {
         if (app.Name.Contains(query, StringComparison.OrdinalIgnoreCase)
-                || FuzzySearch.LD(app.Name, query) < PluginSettings.FuzzySearchThreshold) {
+                || FuzzySearch.LD(app.Name.Replace("Portable", "").Replace("portable", ""), query) < PluginSettings.FuzzySearchThreshold) {
           IdentifiedApps.Add(app);
         }
       }
