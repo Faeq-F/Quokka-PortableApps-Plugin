@@ -42,13 +42,9 @@ namespace Plugin_PortableApps {
 
     private List<ListItem> ProduceItems(string query) {
       List<ListItem> IdentifiedApps = new();
-      //filtering apps
-      foreach (ListItem app in AllPortableApps) {
-        if (app.Name.Contains(query, StringComparison.OrdinalIgnoreCase)
-                || FuzzySearch.LD(app.Name.Replace("Portable", "").Replace("portable", ""), query) < PluginSettings.FuzzySearchThreshold) {
-          IdentifiedApps.Add(app);
-        }
-      }
+      IdentifiedApps.AddRange(
+      FuzzySearch.searchAll(query, AllPortableApps.Select(x => x.Name.ToLower().Replace("portable", "")).ToList(), PluginSettings.FuzzySearchThreshold)
+      .Select(x => AllPortableApps[x.Index]));
       IdentifiedApps = RemoveBlacklistItems(IdentifiedApps);
       return IdentifiedApps;
     }
@@ -117,7 +113,8 @@ namespace Plugin_PortableApps {
     /// <param name="command">The PortableAppsSignifier (Since there is only 1 signifier for this plugin), followed by the app being searched for</param>
     /// <returns>List of PortableApps that possibly match what is being searched for</returns>
     public override List<ListItem> OnSignifier(string command) {
-      return ProduceItems(command.Substring(pluginSettings.PortableAppsSignifier.Length));
+      command = command.Substring(pluginSettings.PortableAppsSignifier.Length);
+      return FuzzySearch.sort(command, ProduceItems(command)).ToList();
     }
 
   }
