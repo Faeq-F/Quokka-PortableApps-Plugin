@@ -1,5 +1,6 @@
 ﻿using Quokka;
 using Quokka.ListItems;
+using Quokka.PluginArch;
 using System;
 using System.Diagnostics;
 using System.Windows.Media.Imaging;
@@ -10,7 +11,9 @@ namespace Plugin_PortableApps {
     public PortableAppsFolderItem() {
       Name = "Portable Apps Folder";
       Description = "Shortcut to the folder containing your portable apps";
-      Icon = new BitmapImage(new Uri(Environment.CurrentDirectory + "\\PlugBoard\\Plugin_PortableApps\\Plugin\\portableAppsFolder.png"));
+      UiDispatcher.BeginInvoke(() => {
+        Icon = new BitmapImage(new Uri(Environment.CurrentDirectory + "\\PlugBoard\\Plugin_PortableApps\\Plugin\\portableAppsFolder.png"));
+      });
     }
 
     public override void Execute() {

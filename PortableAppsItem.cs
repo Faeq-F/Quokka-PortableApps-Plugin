@@ -1,4 +1,5 @@
 ﻿using Quokka.ListItems;
+using Quokka.PluginArch;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
@@ -18,7 +19,9 @@ namespace Plugin_PortableApps {
       Name = Path.GetFileNameWithoutExtension(exePath);
       Description = exePath;
       ExtraDetails = FileVersionInfo.GetVersionInfo(exePath).LegalCopyright + "\n" + FileVersionInfo.GetVersionInfo(exePath).CompanyName + "\n" + FileVersionInfo.GetVersionInfo(exePath).FileVersion;
-      Icon = Imaging.CreateBitmapSourceFromHIcon(System.Drawing.Icon.ExtractAssociatedIcon(exePath)!.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+      UiDispatcher.BeginInvoke(() => {
+        Icon = Imaging.CreateBitmapSourceFromHIcon(System.Drawing.Icon.ExtractAssociatedIcon(exePath)!.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+      });
     }
 
     public override void Execute() {
