@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-
-namespace Plugin_PortableApps {
+﻿namespace PluginPortableApps
+{
 
   /// <summary>
   ///   The settings for this (Portable Apps) plugin
   /// </summary>
-  public class Settings {
+  public class Settings
+  {
 
     /// <summary>
     ///   The directory in which portable apps are saved
@@ -30,7 +30,7 @@ namespace Plugin_PortableApps {
     ///   List of application names to not show (defaults to
     ///   empty - all apps can be shown)
     /// </summary>
-    public List<string> BlackList { get; set; } = new List<string>(new string[] { });
+    public List<string> BlackList { get; set; } = new List<string>(Array.Empty<string>());
 
     /// <summary>
     ///   The threshold for when to consider an application

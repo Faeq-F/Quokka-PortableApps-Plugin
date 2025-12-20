@@ -1,23 +1,27 @@
 ﻿using Quokka;
 using Quokka.ListItems;
 using Quokka.PluginArch;
-using System;
 using System.Diagnostics;
-using System.Windows.Media.Imaging;
 
-namespace Plugin_PortableApps {
-  internal class PortableAppsFolderItem : ListItem {
+namespace PluginPortableApps
+{
+  internal class PortableAppsFolderItem : ListItem
+  {
 
-    public PortableAppsFolderItem() {
+    public PortableAppsFolderItem()
+    {
       Name = "Portable Apps Folder";
       Description = "Shortcut to the folder containing your portable apps";
-      UiDispatcher.BeginInvoke(() => {
-        Icon = new BitmapImage(new Uri(Environment.CurrentDirectory + "\\PlugBoard\\Plugin_PortableApps\\Plugin\\portableAppsFolder.png"));
-      });
+      Icon = IconCache.GetOrAdd(
+        Environment.CurrentDirectory + "\\PlugBoard\\PluginPortableApps\\Plugin\\portableAppsFolder.png"
+      );
     }
 
-    public override void Execute() {
-      Process.Start((string) App.Current.Resources["FileManager"], '"' + PortableApps.PluginSettings.PortableAppsDirectory + '"');
+    public override void Execute()
+    {
+      Process.Start(
+        (string)App.Current.Resources["FileManager"], '"' + PortableApps.PluginSettings.PortableAppsDirectory + '"'
+      );
       App.Current.MainWindow.Close();
     }
   }
