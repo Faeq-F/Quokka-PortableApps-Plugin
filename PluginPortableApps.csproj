@@ -13,7 +13,7 @@
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
 
     <Product>PluginPortableApps</Product>
-    <BaseOutputPath>G:\Quokka\Quokka\PlugBoard\PluginPortableApps</BaseOutputPath>
+    <BaseOutputPath>I:\Quokka\Quokka\PlugBoard\PluginPortableApps</BaseOutputPath>
     <Configurations>Plugin</Configurations>
     
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>

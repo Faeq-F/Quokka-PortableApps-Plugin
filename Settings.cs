@@ -26,6 +26,9 @@
     /// </summary>
     public string PortableAppsSignifier { get; set; } = "portapp ";
 
+    ///List of file extensions to consider as portable apps (defaults to "exe" and "lnk")
+    public List<string> Extensions { get; set; }  = new List<string> { "exe", "lnk" };
+
     /// <summary>
     ///   List of application names to not show (defaults to
     ///   empty - all apps can be shown)

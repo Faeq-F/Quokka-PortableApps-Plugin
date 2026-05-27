@@ -102,9 +102,9 @@ namespace PluginPortableApps
         var topLevelDirs = Directory.EnumerateDirectories(PluginSettings.PortableAppsDirectory, "*", SearchOption.TopDirectoryOnly);
         foreach (string dir in topLevelDirs)
         {
-          foreach (string exe in Directory.EnumerateFiles(dir, "*", SearchOption.TopDirectoryOnly).Where(s => s.EndsWith(".exe", StringComparison.Ordinal)))
+          foreach (string app in Directory.EnumerateFiles(dir, "*", SearchOption.TopDirectoryOnly).Where(s => PluginSettings.Extensions.Any(ext => s.EndsWith('.' + ext, StringComparison.OrdinalIgnoreCase))))
           {
-            AllPortableApps.Add(new PortableAppsItem(exe));
+            AllPortableApps.Add(new PortableAppsItem(app));
           }
         }
       }

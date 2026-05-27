@@ -2,6 +2,7 @@
   "PortableAppsDirectory": "..\\..\\PortableApps\\",
   "AllAppsSpecialCommand": "AllPortableApps",
   "PortableAppsSignifier": "portapp ",
+  "Extensions": [ "exe", "lnk" ],
   "BlackList": [],
   "FuzzySearchThreshold": 60
 }
