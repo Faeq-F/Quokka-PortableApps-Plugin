@@ -1,4 +1,4 @@
-﻿using Quokka.ListItems;
+using Quokka.ListItems;
 using Quokka.PluginArch;
 using System.Diagnostics;
 using System.IO;
@@ -11,7 +11,7 @@ namespace PluginPortableApps
   /// <summary>
   /// The Item class for the plugin - represents a portable app
   /// </summary>
-  internal class PortableAppsItem : ListItem
+  internal sealed class PortableAppsItem : ListItem
   {
     public string ExePath { get; set; }
     public string ExtraDetails { get; set; }
@@ -25,7 +25,11 @@ namespace PluginPortableApps
 
       UiDispatcher.BeginInvoke(() =>
       {
-        Icon = Imaging.CreateBitmapSourceFromHIcon(System.Drawing.Icon.ExtractAssociatedIcon(exePath)!.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+        using System.Drawing.Icon? extractedIcon = System.Drawing.Icon.ExtractAssociatedIcon(exePath);
+        if (extractedIcon is not null)
+        {
+          Icon = Imaging.CreateBitmapSourceFromHIcon(extractedIcon.Handle, Int32Rect.Empty, BitmapSizeOptions.FromEmptyOptions());
+        }
       });
     }
 

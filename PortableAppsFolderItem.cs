@@ -1,11 +1,11 @@
-﻿using Quokka;
 using Quokka.ListItems;
 using Quokka.PluginArch;
 using System.Diagnostics;
+using System.Windows;
 
 namespace PluginPortableApps
 {
-  internal class PortableAppsFolderItem : ListItem
+  internal sealed class PortableAppsFolderItem : ListItem
   {
 
     public PortableAppsFolderItem()
@@ -20,9 +20,9 @@ namespace PluginPortableApps
     public override void Execute()
     {
       Process.Start(
-        (string)App.Current.Resources["FileManager"], '"' + PortableApps.PluginSettings.PortableAppsDirectory + '"'
+        (string)Application.Current.Resources["FileManager"], '"' + PortableApps.PluginSettings.PortableAppsDirectory + '"'
       );
-      App.Current.MainWindow.Close();
+      Application.Current.MainWindow.Close();
     }
   }
 }

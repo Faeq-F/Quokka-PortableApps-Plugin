@@ -1,19 +1,20 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net4.8-windows</TargetFramework>
+    <TargetFramework>net10.0-windows</TargetFramework>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <PublishReadyToRun>true</PublishReadyToRun>
     <Nullable>enable</Nullable>
-    <LangVersion>10.0</LangVersion>
+    <LangVersion>latest</LangVersion>
     <UseWPF>true</UseWPF>
     <ImplicitUsings>enable</ImplicitUsings>
-    <SelfContained>true</SelfContained>
+    <SelfContained>false</SelfContained>
     <DebugType>embedded</DebugType>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
 
     <Product>PluginPortableApps</Product>
-    <BaseOutputPath>I:\Quokka\Quokka\PlugBoard\PluginPortableApps</BaseOutputPath>
+    <BaseOutputPath>..\BuildOutput\Quokka\PlugBoard\PluginPortableApps</BaseOutputPath>
+    <PublishDir>..\BuildOutput\Quokka\PlugBoard\PluginPortableApps\Plugin\</PublishDir>
     <Configurations>Plugin</Configurations>
     
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
@@ -25,7 +26,10 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\Quokka\Quokka.csproj" />
+    <ProjectReference Include="..\Quokka\Quokka.csproj">
+      <Private>false</Private>
+      <ExcludeAssets>runtime;contentFiles</ExcludeAssets>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Update="ContextPane.xaml.cs">

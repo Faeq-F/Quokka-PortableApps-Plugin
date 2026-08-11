@@ -1,9 +1,12 @@
-﻿namespace PluginPortableApps
+using System.Collections.ObjectModel;
+
+namespace PluginPortableApps
 {
 
   /// <summary>
   ///   The settings for this (Portable Apps) plugin
   /// </summary>
+#pragma warning disable CA1724 // Type name conflicts with namespace name
   public class Settings
   {
 
@@ -26,14 +29,16 @@
     /// </summary>
     public string PortableAppsSignifier { get; set; } = "portapp ";
 
-    ///List of file extensions to consider as portable apps (defaults to "exe" and "lnk")
-    public List<string> Extensions { get; set; }  = new List<string> { "exe", "lnk" };
+    /// <summary>
+    /// List of file extensions to consider as portable apps (defaults to "exe" and "lnk")
+    /// </summary>
+    public Collection<string> Extensions { get; } = new() { "exe", "lnk" };
 
     /// <summary>
     ///   List of application names to not show (defaults to
     ///   empty - all apps can be shown)
     /// </summary>
-    public List<string> BlackList { get; set; } = new List<string>(Array.Empty<string>());
+    public Collection<string> BlackList { get; } = new();
 
     /// <summary>
     ///   The threshold for when to consider an application
